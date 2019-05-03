@@ -1,33 +1,35 @@
 public class Deque<E> {
+    DoublyLinkedList<E> doublyLinkedList;
 
+    Deque(){
+        doublyLinkedList = new DoublyLinkedList<>();
+    }
     public void pushBack(E data){
-        //TODO
+        doublyLinkedList.add(data, doublyLinkedList.size());
     }
     public void pushFront(E data){
-        //TODO
+        doublyLinkedList.add(data, 0);
     }
     public E popBack(){
-        //TODO
-        return null;
+        E ret = doublyLinkedList.get(doublyLinkedList.size()-1);
+        doublyLinkedList.remove(doublyLinkedList.size()-1);
+        return ret;
     }
     public E popFront(){
-        //TODO
-        return null;
+        E ret = doublyLinkedList.get(0);
+        doublyLinkedList.remove(0);
+        return ret;
     }
     public E getBack(){
-        //TODO
-        return null;
+        return doublyLinkedList.get(doublyLinkedList.size()-1);
     }
     public E getFront(){
-        //TODO
-        return null;
+        return doublyLinkedList.get(0);
     }
     public int size(){
-        //TODO
-        return 0;
+        return doublyLinkedList.size();
     }
     public boolean isEmpty(){
-        //TODO
-        return false;
+        return doublyLinkedList.isEmpty();
     }
 }
