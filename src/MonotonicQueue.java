@@ -1,30 +1,44 @@
 public class MonotonicQueue<E extends Comparable<E>> {
+    private Queue<E> queue;
+    private Deque<E> min;
+    private Deque<E> max;
 
-    public void push(E data){
-        //TODO
+    MonotonicQueue(){
+        queue = new ArrayQueue<>();
+        min = new Deque<>();
+        max = new Deque<>();
     }
-    public E front(){
-        //TODO
-        return null;
+    public void push(E data){       //Amortized O(1)
+        queue.push(data);
+        while(!min.isEmpty() && min.getBack().compareTo(data) > 0)
+            min.popBack();
+        min.pushBack(data);
+
+        while(!max.isEmpty() && max.getBack().compareTo(data) < 0)
+            max.popBack();
+        max.pushBack(data);
     }
-    public E pop(){
-        //TODO
-        return null;
+    public E front(){       //O(1)
+        return queue.front();
     }
-    public E getMin(){
-        //TODO
-        return null;
+    public E pop(){         //O(1)
+        E ret = queue.pop();
+        if(min.getFront().equals(ret))
+            min.popFront();
+        if(max.getFront().equals(ret))
+            max.popFront();
+        return ret;
     }
-    public E getMax(){
-        //TODO
-        return null;
+    public E getMin(){       //O(1)
+        return min.getFront();
     }
-    public int size(){
-        //TODO
-        return 0;
+    public E getMax(){       //O(1)
+        return max.getFront();
     }
-    public boolean isEmpty(){
-        //TODO
-        return false;
+    public int size(){       //O(1)
+        return queue.size();
+    }
+    public boolean isEmpty(){       //O(1)
+        return queue.isEmpty();
     }
 }
