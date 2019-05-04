@@ -13,6 +13,13 @@ public class ArrayList<E> implements List<E> {
         return array[index];
     }
 
+    public void set(int index, E data){
+        if(index < 0 || index > size)
+            throw new IndexOutOfBoundsException();
+        if(index == size)   addBack(data);
+        array[index] = data;
+    }
+
     public void addBack(E data) {
         if(size == array.length)
             resize(2*array.length);
